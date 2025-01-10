@@ -20,7 +20,6 @@ class DetailsScreen extends StatelessWidget {
   final List<Genre> genreList;
 
   const DetailsScreen({super.key, required this.movieID, required this.genreIds, required this.genreList});
-
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -68,11 +67,8 @@ class DetailsScreen extends StatelessWidget {
                                 fontWeight: FontWeight.w500,
                                 color: Colors.white,
                               ),
-                            ).animate().fadeIn(duration: 1.seconds).moveY(
-                                begin: 50,
-                                end: 0,
-                                duration: 1.seconds,
-                                curve: Curves.easeOut),
+                            ).animate().fadeIn(duration: 1.seconds)
+                                .moveY(begin: 50, end: 0, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 12),
                             Row(
                               children: [
@@ -103,16 +99,8 @@ class DetailsScreen extends StatelessWidget {
                                 )
                               ],
                             )
-                                .animate()
-                                .fadeIn(
-                                    delay: 500.milliseconds,
-                                    duration: 1.seconds)
-                                .moveY(
-                                    begin: 50,
-                                    end: 0,
-                                    delay: 500.milliseconds,
-                                    duration: 1.seconds,
-                                    curve: Curves.easeOut),
+                                .animate().fadeIn(delay: 500.milliseconds, duration: 1.seconds)
+                                .moveY(begin: 50, end: 0, delay: 500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 24),
                             Text(
                               "Genre: " + genreNames.join(', '),
@@ -123,14 +111,8 @@ class DetailsScreen extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             )
-                                .animate()
-                                .fadeIn(delay: 1.seconds, duration: 1.seconds)
-                                .moveY(
-                                    begin: 50,
-                                    end: 0,
-                                    delay: 1.seconds,
-                                    duration: 1.seconds,
-                                    curve: Curves.easeOut),
+                                .animate().fadeIn(delay: 1.seconds, duration: 1.seconds)
+                                .moveY(begin: 50, end: 0, delay: 1.seconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 24),
                             Text(
                               "Descreption",
@@ -141,16 +123,8 @@ class DetailsScreen extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             )
-                                .animate()
-                                .fadeIn(
-                                    delay: 1500.milliseconds,
-                                    duration: 1.seconds)
-                                .moveY(
-                                    begin: 50,
-                                    end: 0,
-                                    delay: 1500.milliseconds,
-                                    duration: 1.seconds,
-                                    curve: Curves.easeOut),
+                                .animate().fadeIn(delay: 1500.milliseconds, duration: 1.seconds)
+                                .moveY(begin: 50, end: 0, delay: 1500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 12),
                             ReadMoreText(
                               movie.overview,
@@ -159,6 +133,7 @@ class DetailsScreen extends StatelessWidget {
                               colorClickableText: Colors.pink,
                               trimCollapsedText: "Read more",
                               trimExpandedText: " Read less",
+
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w400,
@@ -175,28 +150,12 @@ class DetailsScreen extends StatelessWidget {
                                   fontSize: 14,
                                   color: Colors.white),
                             )
-                                .animate()
-                                .fadeIn(
-                                    delay: 1500.milliseconds,
-                                    duration: 1.seconds)
-                                .moveY(
-                                    begin: 50,
-                                    end: 0,
-                                    delay: 1500.milliseconds,
-                                    duration: 1.seconds,
-                                    curve: Curves.easeOut),
+                                .animate().fadeIn(delay: 1500.milliseconds, duration: 1.seconds)
+                                .moveY(begin: 50, end: 0, delay: 1500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 24),
                             RelatedWidget()
-                                .animate()
-                                .fadeIn(
-                                    delay: 2000.milliseconds,
-                                    duration: 1.seconds)
-                                .moveX(
-                                    begin: -24,
-                                    end: 0,
-                                    delay: 2000.milliseconds,
-                                    duration: 1.seconds,
-                                    curve: Curves.easeOut),
+                                .animate().fadeIn(delay: 2000.milliseconds, duration: 1.seconds)
+                                .moveX(begin: -24, end: 0, delay: 2000.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                           ],
                         ),
                       ),
@@ -224,13 +183,14 @@ class DetailsScreen extends StatelessWidget {
                           },
                           items: [
                             DropdownMenuItem(value: "Photo", child: Text("Photos & Screens")),
-                            DropdownMenuItem(value: "Web", child: Text("Movie Website")),
+                            DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
+                                child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black),)),
                           ]),
-                    ],
-                  ),
+                    ]
+                  )
                 )
-              ],
-            ),
+              ]
+            )
           );
         } else if (state is DetailsScreenErrorState)
           return Text(state.ErrorMSG);

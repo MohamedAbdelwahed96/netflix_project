@@ -31,8 +31,7 @@ class _WebPageState extends State<WebPage> {
           },
         ),
       )
-      ..loadRequest(Uri.parse(
-          widget.website == "" ? "https://www.google.com/" : widget.website));
+      ..loadRequest(Uri.parse(widget.website));
   }
 
   @override

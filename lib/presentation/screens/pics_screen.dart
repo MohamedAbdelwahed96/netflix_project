@@ -44,17 +44,18 @@ class PicsScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                                     builder: (_) => PhotoViewGallery.builder(
-                                        itemCount: x.length,
-                                        builder: (context, index) {
-                                          final movie = x[index];
+                                          itemCount: x.length,
+                                          builder: (context, index) {
+                                            final movie = x[index];
 
-                                          return PhotoViewGalleryPageOptions(
-                                              imageProvider: NetworkImage("${Paths.Img}original${movie.filePath}"),
-                                              minScale: PhotoViewComputedScale.contained,
-                                              maxScale: PhotoViewComputedScale.covered);
-                                        },
-                                        pageController: PageController(initialPage: index),
-                                        loadingBuilder: (context, event) => CircleLoading())));
+                                            return PhotoViewGalleryPageOptions(
+                                                imageProvider: NetworkImage("${Paths.Img}original${movie.filePath}"),
+                                                minScale: PhotoViewComputedScale.contained,
+                                                maxScale: PhotoViewComputedScale.covered);
+                                          },
+                                          pageController: PageController(initialPage: index),
+                                          loadingBuilder: (context, event) => CircleLoading()),
+                                    ));
                           },
                           child: ClipRRect(
                               borderRadius: BorderRadius.circular(16),
