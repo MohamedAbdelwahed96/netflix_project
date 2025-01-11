@@ -11,8 +11,6 @@ class VideosScreen extends StatelessWidget {
   final movieId;
   const VideosScreen({super.key, required this.movieId});
 
-
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider(

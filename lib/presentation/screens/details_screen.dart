@@ -8,7 +8,7 @@ import 'package:netfelix_project/data/movies_data.dart';
 import 'package:netfelix_project/logic/details_screen_bloc/cubit.dart';
 import 'package:netfelix_project/logic/details_screen_bloc/state.dart';
 import 'package:netfelix_project/logic/genre_bloc/cubit.dart';
-import 'package:netfelix_project/logic/top_rated_bloc/cubit.dart';
+import 'package:netfelix_project/logic/related_bloc/cubit.dart';
 import 'package:netfelix_project/presentation/screens/pics_screen.dart';
 import 'package:netfelix_project/presentation/screens/videos_screen.dart';
 import 'package:netfelix_project/presentation/screens/web_page.dart';
@@ -26,7 +26,7 @@ class DetailsScreen extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => DetailsScreenCubit(Dio())..getMovieData(movieID)),
-        BlocProvider(create: (context) => TopRatedCubit(Dio())..getTopRatedMovies()),
+        BlocProvider(create: (context) => RelatedCubit(Dio())..getRelatedMovies(movieID)),
         BlocProvider(create: (context) => GenreCubit(Dio())..getGenre()),
       ],
       child: BlocBuilder<DetailsScreenCubit, DetailsScreenStates>(
