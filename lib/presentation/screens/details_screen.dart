@@ -45,11 +45,13 @@ class DetailsScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Image.network(
-                          movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}original${movie.backdropPath}",
-                          fit: BoxFit.cover),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height*0.33,
+                        child: Image.network(
+                            movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}original${movie.backdropPath}",
+                            fit: BoxFit.cover),
+                      ),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                         child: Column(
@@ -99,7 +101,7 @@ class DetailsScreen extends StatelessWidget {
                                 .moveY(begin: 50, end: 0, delay: 500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 24),
                             Text(
-                              "Genre: " + genreNames.join(', '),
+                              "Genre: " + genreNames.join(", "),
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w500,
