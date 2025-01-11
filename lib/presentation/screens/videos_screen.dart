@@ -26,48 +26,46 @@ class VideosScreen extends StatelessWidget {
               backgroundColor: Colors.black,
               body: Padding(
                 padding: const EdgeInsets.all(12),
-                child: SizedBox(
-                  height: MediaQuery.of(context).size.height,
-                  child: ListView.builder(
-                      itemCount: x.length,
-                      itemBuilder: (context, index) {
-                        final movie = x[index];
+                child: ListView.builder(
+                    itemCount: x.length,
+                    itemBuilder: (context, index) {
+                      final movie = x[index];
 
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              YoutubePlayer(
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: YoutubePlayer(
                                 controller: YoutubePlayerController(
                                   initialVideoId: movie.key,
                                   flags: YoutubePlayerFlags(
-                                    autoPlay: false,
-                                    mute: false,
-                                  ),
+                                      autoPlay: false, mute: false, enableCaption: false, hideThumbnail: true),
                                 ),
                                 showVideoProgressIndicator: true,
-                                progressIndicatorColor: Colors.amber,
+                                progressIndicatorColor: Color.fromRGBO(243, 29, 28, 1),
                                 progressColors: const ProgressBarColors(
-                                  playedColor: Colors.amber,
-                                  handleColor: Colors.amberAccent,
+                                  playedColor: Color.fromRGBO(243, 29, 28, 1),
+                                  handleColor: Color.fromRGBO(243, 29, 28, 1),
                                 ),
 
                               ),
-                              SizedBox(height: 4),
-                              Text(movie.name, style: TextStyle(
-                                  fontFamily: "SF Pro Display",
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 20.92,
-                                  color: Colors.white
-                              ),)
-                            ],
-                          ).animate()
-                              .fadeIn(delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut)
-                              .moveY(begin: 50, end: 0, delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut),
-                        );
-                      }),
-                ),
+                            ),
+                            SizedBox(height: 4),
+                            Text(movie.name, style: TextStyle(
+                                fontFamily: "SF Pro Display",
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20.92,
+                                color: Colors.white
+                            ),)
+                          ],
+                        ).animate()
+                            .fadeIn(delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut)
+                            .moveY(begin: 50, end: 0, delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut),
+                      );
+                    }),
               ),
             );
           }

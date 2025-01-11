@@ -180,10 +180,9 @@ class DetailsScreen extends StatelessWidget {
                             items: [
                               DropdownMenuItem(value: "Photo", enabled: movie.backdropPath==""?false:true,
                                   child: Text("Photos & Screens", style: TextStyle(color: movie.backdropPath==""?Colors.grey:Colors.black))),
-                              DropdownMenuItem(value: "Videos",enabled: movie.video==false?false:true,
-                                  child: Text("Videos", style: TextStyle(color: movie.video==false?Colors.grey:Colors.black))),
+                              DropdownMenuItem(value: "Videos", child: Text("Videos")),
                               DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
-                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black)))
+                                  child: Text(movie.id.toString(), style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black)))
 
                             ]),
                       ]
