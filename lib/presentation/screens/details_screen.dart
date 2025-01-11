@@ -173,17 +173,18 @@ class DetailsScreen extends StatelessWidget {
                             underline: SizedBox(),
                             onChanged: (String? value){
                               value=="Photo"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
-                              value=="Web"?Navigator.push(context,MaterialPageRoute(builder: (context) => WebPage(website: movie.homepage))):
                               value=="Videos"?Navigator.push(context,MaterialPageRoute(builder: (context) => VideosScreen(movieId: movie.id.toString()))):
+                              value=="Web"?Navigator.push(context,MaterialPageRoute(builder: (context) => WebPage(website: movie.homepage))):
                               SizedBox();
                             },
                             items: [
                               DropdownMenuItem(value: "Photo", enabled: movie.backdropPath==""?false:true,
                                   child: Text("Photos & Screens", style: TextStyle(color: movie.backdropPath==""?Colors.grey:Colors.black))),
-                              DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
-                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black))),
                               DropdownMenuItem(value: "Videos",enabled: movie.video==false?false:true,
-                                  child: Text("Videos", style: TextStyle(color: movie.video==false?Colors.grey:Colors.black)))
+                                  child: Text("Videos", style: TextStyle(color: movie.video==false?Colors.grey:Colors.black))),
+                              DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
+                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black)))
+
                             ]),
                       ]
                     )

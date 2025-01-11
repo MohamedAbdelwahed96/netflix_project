@@ -66,9 +66,8 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                                   child: Image.network(
                                       movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}w500${movie.backdropPath}",
                                       width: 142,
-                                      fit: BoxFit.cover, frameBuilder: (context,
-                                      child, frame, wasSynchronouslyLoaded) {
-                                    return child;
+                                      fit: BoxFit.cover, frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+                                        return child;
                                   }, loadingBuilder:
                                       (context, child, loadingProgress) {
                                     if (loadingProgress == null)
