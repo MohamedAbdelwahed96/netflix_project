@@ -172,17 +172,17 @@ class DetailsScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.black),
                             underline: SizedBox(),
                             onChanged: (String? value){
-                              value=="Photo"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
+                              value=="Photos"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
                               value=="Videos"?Navigator.push(context,MaterialPageRoute(builder: (context) => VideosScreen(movieId: movie.id.toString()))):
                               value=="Web"?Navigator.push(context,MaterialPageRoute(builder: (context) => WebPage(website: movie.homepage))):
                               SizedBox();
                             },
                             items: [
-                              DropdownMenuItem(value: "Photo", enabled: movie.backdropPath==""?false:true,
+                              DropdownMenuItem(value: "Photos", enabled: movie.backdropPath==""?false:true,
                                   child: Text("Photos & Screens", style: TextStyle(color: movie.backdropPath==""?Colors.grey:Colors.black))),
                               DropdownMenuItem(value: "Videos", child: Text("Videos")),
                               DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
-                                  child: Text(movie.id.toString(), style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black)))
+                                  child: Text("Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black)))
 
                             ]),
                       ]
