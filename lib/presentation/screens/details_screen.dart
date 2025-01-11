@@ -48,14 +48,15 @@ class DetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Image.network(
-                          "${Paths.Img}original${movie.backdropPath}", fit: BoxFit.cover),
+                          movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}original${movie.backdropPath}",
+                          fit: BoxFit.cover),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title.toString() + movie.id.toString(),
+                              movie.title.toString(),
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontSize: 24,
@@ -181,7 +182,8 @@ class DetailsScreen extends StatelessWidget {
                                   child: Text("Photos & Screens", style: TextStyle(color: movie.backdropPath==""?Colors.grey:Colors.black))),
                               DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
                                   child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black))),
-                              DropdownMenuItem(value: "Videos", child: Text("Videos"))
+                              DropdownMenuItem(value: "Videos",enabled: movie.video==false?false:true,
+                                  child: Text("Videos", style: TextStyle(color: movie.video==false?Colors.grey:Colors.black)))
                             ]),
                       ]
                     )
