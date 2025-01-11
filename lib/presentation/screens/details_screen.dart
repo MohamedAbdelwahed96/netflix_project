@@ -55,7 +55,7 @@ class DetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title.toString(),
+                              movie.title.toString() + movie.id.toString(),
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontSize: 24,
@@ -177,9 +177,10 @@ class DetailsScreen extends StatelessWidget {
                               SizedBox();
                             },
                             items: [
-                              DropdownMenuItem(value: "Photo", child: Text("Photos & Screens")),
+                              DropdownMenuItem(value: "Photo", enabled: movie.backdropPath==""?false:true,
+                                  child: Text("Photos & Screens", style: TextStyle(color: movie.backdropPath==""?Colors.grey:Colors.black))),
                               DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
-                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black),)),
+                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black))),
                               DropdownMenuItem(value: "Videos", child: Text("Videos"))
                             ]),
                       ]

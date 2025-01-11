@@ -64,7 +64,7 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
                                   child: Image.network(
-                                      "${Paths.Img}w500${movie.backdropPath}",
+                                      movie.backdropPath==null?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}w500${movie.backdropPath}",
                                       width: 142,
                                       fit: BoxFit.cover, frameBuilder: (context,
                                       child, frame, wasSynchronouslyLoaded) {
