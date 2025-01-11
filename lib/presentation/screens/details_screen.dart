@@ -10,6 +10,7 @@ import 'package:netfelix_project/logic/details_screen_bloc/state.dart';
 import 'package:netfelix_project/logic/genre_bloc/cubit.dart';
 import 'package:netfelix_project/logic/top_rated_bloc/cubit.dart';
 import 'package:netfelix_project/presentation/screens/pics_screen.dart';
+import 'package:netfelix_project/presentation/screens/videos_screen.dart';
 import 'package:netfelix_project/presentation/screens/web_page.dart';
 import 'package:netfelix_project/presentation/widgets/related_widget.dart';
 import 'package:readmore/readmore.dart';
@@ -40,22 +41,16 @@ class DetailsScreen extends StatelessWidget {
 
           return Scaffold(
             backgroundColor: Colors.black,
-            body: Stack(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Image.network(
-                          "${Paths.Img}original${movie.backdropPath}",
-                          fit: BoxFit.cover),
-                    ),
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 24, vertical: 24),
+            body: SingleChildScrollView(
+              child: Stack(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.network(
+                          "${Paths.Img}original${movie.backdropPath}", fit: BoxFit.cover),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 24),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -158,38 +153,40 @@ class DetailsScreen extends StatelessWidget {
                                 .moveX(begin: -24, end: 0, delay: 2000.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                           ],
                         ),
-                      ),
+                      )
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 44, horizontal: 14),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);},
+                            icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28)
+                            ),
+                        DropdownButton(
+                            icon: Icon(Icons.more_vert,color: Colors.white, size: 28),
+                            style: TextStyle(color: Colors.black),
+                            underline: SizedBox(),
+                            onChanged: (String? value){
+                              value=="Photo"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
+                              value=="Web"?Navigator.push(context,MaterialPageRoute(builder: (context) => WebPage(website: movie.homepage))):
+                              value=="Videos"?Navigator.push(context,MaterialPageRoute(builder: (context) => VideosScreen(movieId: movie.id.toString()))):
+                              SizedBox();
+                            },
+                            items: [
+                              DropdownMenuItem(value: "Photo", child: Text("Photos & Screens")),
+                              DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
+                                  child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black),)),
+                              DropdownMenuItem(value: "Videos", child: Text("Videos"))
+                            ]),
+                      ]
                     )
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 44, horizontal: 14),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);},
-                          icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28)
-                          ),
-                      DropdownButton(
-                          icon: Icon(Icons.arrow_downward_outlined,color: Colors.white, size: 28),
-                          style: TextStyle(color: Colors.black),
-                          underline: SizedBox(),
-                          onChanged: (String? value){
-                            value=="Photo"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
-                            value=="Web"?Navigator.push(context,MaterialPageRoute(builder: (context) => WebPage(website: movie.homepage))):
-                            SizedBox();
-                          },
-                          items: [
-                            DropdownMenuItem(value: "Photo", child: Text("Photos & Screens")),
-                            DropdownMenuItem(value: "Web", enabled: movie.homepage==""?false:true,
-                                child: Text("Movie Website", style: TextStyle(color: movie.homepage==""?Colors.grey:Colors.black),)),
-                          ]),
-                    ]
                   )
-                )
-              ]
+                ]
+              ),
             )
           );
         } else if (state is DetailsScreenErrorState)
