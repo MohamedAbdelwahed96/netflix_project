@@ -12,7 +12,7 @@ class RelatedCubit extends Cubit<RelatedStates> {
   Future getRelatedMovies(int movieId) async {
     emit(RelatedLoadingState());
     try {
-      final response = await dio.get(Paths.baseURL+movieId.toString()+"/similar"+Paths.apiKey);
+      final response = await dio.get(Paths.baseURL+movieId.toString()+"/recommendations"+Paths.apiKey);
       if (response.statusCode == 200) {
         final movRes = MovieResponse.fromMap(response.data);
         emit(RelatedSuccessState(movRes));
