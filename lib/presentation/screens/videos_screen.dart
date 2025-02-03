@@ -22,51 +22,60 @@ class VideosScreen extends StatelessWidget {
           else if (state is VideosScreenSuccessState){
             final x = state.vid.results;
 
-            return Scaffold(
-              backgroundColor: Colors.black,
-              body: Padding(
-                padding: const EdgeInsets.all(12),
-                child: ListView.builder(
-                    itemCount: x.length,
-                    itemBuilder: (context, index) {
-                      final movie = x[index];
+            return Stack(
+              children: [
+                Scaffold(
+                  backgroundColor: Colors.black,
+                  body: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: ListView.builder(
+                        itemCount: x.length,
+                        itemBuilder: (context, index) {
+                          final movie = x[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(16),
-                              child: YoutubePlayer(
-                                controller: YoutubePlayerController(
-                                  initialVideoId: movie.key,
-                                  flags: YoutubePlayerFlags(
-                                      autoPlay: false, mute: false, enableCaption: false, hideThumbnail: true),
-                                ),
-                                showVideoProgressIndicator: true,
-                                progressIndicatorColor: Color.fromRGBO(243, 29, 28, 1),
-                                progressColors: const ProgressBarColors(
-                                  playedColor: Color.fromRGBO(243, 29, 28, 1),
-                                  handleColor: Color.fromRGBO(243, 29, 28, 1),
-                                ),
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: YoutubePlayer(
+                                    controller: YoutubePlayerController(
+                                      initialVideoId: movie.key,
+                                      flags: YoutubePlayerFlags(
+                                          autoPlay: false, mute: false, enableCaption: false, hideThumbnail: true),
+                                    ),
+                                    showVideoProgressIndicator: true,
+                                    progressIndicatorColor: Color.fromRGBO(243, 29, 28, 1),
+                                    progressColors: const ProgressBarColors(
+                                      playedColor: Color.fromRGBO(243, 29, 28, 1),
+                                      handleColor: Color.fromRGBO(243, 29, 28, 1),
+                                    ),
 
-                              ),
-                            ),
-                            SizedBox(height: 4),
-                            Text(movie.name, style: TextStyle(
-                                fontFamily: "SF Pro Display",
-                                fontWeight: FontWeight.w700,
-                                fontSize: 20.92,
-                                color: Colors.white
-                            ),)
-                          ],
-                        ).animate()
-                            .fadeIn(delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut)
-                            .moveY(begin: 50, end: 0, delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut),
-                      );
-                    }),
-              ),
+                                  ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(movie.name, style: TextStyle(
+                                    fontFamily: "SF Pro Display",
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20.92,
+                                    color: Colors.white
+                                ),)
+                              ],
+                            ).animate()
+                                .fadeIn(delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut)
+                                .moveY(begin: 50, end: 0, delay: Duration(milliseconds: index * 500), duration: 1.seconds, curve: Curves.easeOut),
+                          );
+                        }),
+                  ),
+                ),
+                IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);},
+                    icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28)
+                )
+              ],
             );
           }
           else if (state is VideosScreenErrorState)

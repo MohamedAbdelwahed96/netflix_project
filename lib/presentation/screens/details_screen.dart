@@ -37,7 +37,7 @@ class DetailsScreen extends StatelessWidget {
           final movie = state.MovieDetails;
 
           // Map the genreIds to genre names => Find the genre name for each genre ID
-          List<String> genreNames = genreIds.map((filmID) => genreList.firstWhere((filmGenre) => filmGenre.id == filmID).name).toList();
+          final genreNames = genreIds.map((id) => genreList.firstWhere((genre) => genre.id == id).name).toList();
 
           return Scaffold(
             backgroundColor: Colors.black,
@@ -58,7 +58,7 @@ class DetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title.toString(),
+                              "${movie.title} (${movie.releaseDate.substring(0,4)})",
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontSize: 24,

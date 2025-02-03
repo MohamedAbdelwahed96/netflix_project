@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           BlocProvider(create: (context) => PopularCubit(Dio())..getPopularMovies()),
           BlocProvider(create: (context) => TopRatedCubit(Dio())..getTopRatedMovies()),
           BlocProvider(create: (context) => UpcomingCubit(Dio())..getUpcomingMovies()),
-          BlocProvider(create: (context) => GenreCubit(Dio())..getGenre())
+          BlocProvider(create: (context) => GenreCubit(Dio())..getGenre()),
         ],
         child: Scaffold(
           backgroundColor: Colors.black,
