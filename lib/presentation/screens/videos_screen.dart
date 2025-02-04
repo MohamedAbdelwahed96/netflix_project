@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netfelix_project/core/basic_widgets.dart';
+import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/logic/videos_screen_bloc/cubit.dart';
 import 'package:netfelix_project/logic/videos_screen_bloc/state.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -17,9 +18,9 @@ class VideosScreen extends StatelessWidget {
       create: (context) => VideosScreenCubit(Dio())..getVideos(movieId),
       child: BlocBuilder<VideosScreenCubit, VideosScreenStates>(
         builder: (context, state) {
-          if (state is VideosScreenLoadingState)
+          if (state is VideosScreenLoadingState) {
             return CircleLoading();
-          else if (state is VideosScreenSuccessState){
+          } else if (state is VideosScreenSuccessState){
             final x = state.vid.results;
 
             return Stack(
@@ -47,10 +48,10 @@ class VideosScreen extends StatelessWidget {
                                           autoPlay: false, mute: false, enableCaption: false, hideThumbnail: true),
                                     ),
                                     showVideoProgressIndicator: true,
-                                    progressIndicatorColor: Color.fromRGBO(243, 29, 28, 1),
+                                    progressIndicatorColor: ColorsManager.mainRed,
                                     progressColors: const ProgressBarColors(
-                                      playedColor: Color.fromRGBO(243, 29, 28, 1),
-                                      handleColor: Color.fromRGBO(243, 29, 28, 1),
+                                      playedColor: ColorsManager.mainRed,
+                                      handleColor: ColorsManager.mainRed,
                                     ),
 
                                   ),
@@ -78,10 +79,11 @@ class VideosScreen extends StatelessWidget {
               ],
             );
           }
-          else if (state is VideosScreenErrorState)
-            return Text(state.errormsg);
-          else
+          else if (state is VideosScreenErrorState) {
+            return Text(state.errorMSG);
+          } else {
             return SizedBox();
+          }
         }
       )
     );

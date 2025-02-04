@@ -21,9 +21,9 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<NowPlayingCubit, NowPlayingStates>(
         builder: (context, state) {
-      if (state is NowPlayingLoadingState)
+      if (state is NowPlayingLoadingState) {
         return CircleLoading();
-      else if (state is NowPlayingSuccessState) {
+      } else if (state is NowPlayingSuccessState) {
         final x = state.NowPlayingRes.movies;
 
         return BlocBuilder<GenreCubit, GenreStates>(builder: (context, state) {
@@ -56,13 +56,16 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                                 frame, wasSynchronouslyLoaded) {
                           return child;
                         }, loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null)
+                          if (loadingProgress == null) {
                             return child;
-                          else
-                            return Padding(
-                              padding: const EdgeInsets.all(150),
-                              child: CircleLoading(),
-                            );
+                          } else {
+                            {
+                              return Padding(
+                                padding: const EdgeInsets.all(150),
+                                child: CircleLoading(),
+                              );
+                            }
+                          }
                         }),
                       );
                     }),
@@ -93,16 +96,18 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                 ),
               )
             ]);
-          } else
+          } else {
             return SizedBox();
+          }
         });
-      } else if (state is NowPlayingErrorState)
+      } else if (state is NowPlayingErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.ErrorMsg, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
         );
-      else
+      } else {
         return SizedBox();
+      }
     });
   }
 }

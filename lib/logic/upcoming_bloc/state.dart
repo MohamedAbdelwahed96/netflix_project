@@ -13,7 +13,7 @@ class UpcomingSuccessState extends UpcomingStates {
 }
 
 class UpcomingErrorState extends UpcomingStates {
-  String ErrorMsg;
+  String errorMSG;
 
-  UpcomingErrorState(this.ErrorMsg);
+  UpcomingErrorState(this.errorMSG);
 }

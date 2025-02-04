@@ -12,10 +12,17 @@ class RelatedCubit extends Cubit<RelatedStates> {
   Future getRelatedMovies(int movieId) async {
     emit(RelatedLoadingState());
     try {
-      final response = await dio.get(Paths.baseURL+movieId.toString()+"/recommendations"+Paths.apiKey);
+      final response = await dio.get("${Paths.baseURL}$movieId/recommendations${Paths.apiKey}");
       if (response.statusCode == 200) {
-        final movRes = MovieResponse.fromMap(response.data);
-        emit(RelatedSuccessState(movRes));
+        // Filter out adult and R-rated movies
+        final filteredMovies = MovieResponse(movies:  MovieResponse.fromMap(response.data).movies.where((movie) =>
+        !movie.adult && movie.certification != "R" &&
+            movie.certification != "NC-17" &&
+            movie.certification != "18" &&
+            movie.certification != "FSK 18" &&
+            movie.certification != "-18"
+        ).toList());
+        emit(RelatedSuccessState(filteredMovies));
       }
     } catch (e) {
       emit(RelatedErrorState(e.toString()));

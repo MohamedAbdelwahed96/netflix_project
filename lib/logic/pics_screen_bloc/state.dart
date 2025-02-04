@@ -13,7 +13,7 @@ class PicsScreenSuccessState extends PicsScreenStates {
 }
 
 class PicsScreenErrorState extends PicsScreenStates {
-  String errormsg;
+  String errorMSG;
 
-  PicsScreenErrorState(this.errormsg);
+  PicsScreenErrorState(this.errorMSG);
 }

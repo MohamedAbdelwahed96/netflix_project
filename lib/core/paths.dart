@@ -7,4 +7,5 @@ class Paths {
   static const String UpcomingURL = "${baseURL}upcoming$apiKey";
   static const String Img = "https://image.tmdb.org/t/p/";
   static const String Genre = "https://api.themoviedb.org/3/genre/movie/list$apiKey";
+  static const String Discover="https://api.themoviedb.org/3/discover/movie$apiKey";
 }

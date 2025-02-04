@@ -13,7 +13,7 @@ class DetailsScreenSuccessState extends DetailsScreenStates {
 }
 
 class DetailsScreenErrorState extends DetailsScreenStates {
-  String ErrorMSG;
+  String errorMSG;
 
-  DetailsScreenErrorState(this.ErrorMSG);
+  DetailsScreenErrorState(this.errorMSG);
 }

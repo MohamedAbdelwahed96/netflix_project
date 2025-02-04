@@ -20,9 +20,9 @@ class PicsScreen extends StatelessWidget {
       create: (context) => PicsScreenCubit(Dio())..getImages(movieId),
       child: BlocBuilder<PicsScreenCubit, PicsScreenStates>(
         builder: (context, state) {
-          if (state is PicsScreenLoadingState)
+          if (state is PicsScreenLoadingState) {
             return CircleLoading();
-          else if (state is PicsScreenSuccessState) {
+          } else if (state is PicsScreenSuccessState) {
             final x = state.img.backdrops;
 
             return Scaffold(
@@ -61,18 +61,18 @@ class PicsScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(16),
                               child: Image.network("${Paths.Img}w500${movie.filePath}",
                                   width: MediaQuery.of(context).size.width * .4,
-                                  fit: BoxFit.fitHeight, frameBuilder: (context,
-                                      child, frame, wasSynchronouslyLoaded) {
+                                  fit: BoxFit.fitHeight,
+                                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                                 return child;
                               }, loadingBuilder:
                                       (context, child, loadingProgress) {
-                                if (loadingProgress == null)
+                                if (loadingProgress == null) {
                                   return child;
-                                else
+                                } else {
                                   return Padding(
-                                    padding: const EdgeInsets.all(20),
-                                    child: CircleLoading()
-                                  );
+                                      padding: const EdgeInsets.all(20),
+                                      child: CircleLoading());
+                                }
                               }).animate().fadeIn(delay: Duration(milliseconds: index * 150),
                                   duration: 1.seconds,
                                   curve: Curves.easeOut)),
@@ -81,10 +81,11 @@ class PicsScreen extends StatelessWidget {
                 ),
               ),
             );
-          } else if (state is PicsScreenErrorState)
-            return Text(state.errormsg);
-          else
+          } else if (state is PicsScreenErrorState) {
+            return Text(state.errorMSG);
+          } else {
             return SizedBox();
+          }
         }
       )
     );

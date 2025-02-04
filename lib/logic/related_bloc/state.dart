@@ -13,7 +13,7 @@ class RelatedSuccessState extends RelatedStates {
 }
 
 class RelatedErrorState extends RelatedStates {
-  String ErrorMsg;
+  String errorMSG;
 
-  RelatedErrorState(this.ErrorMsg);
+  RelatedErrorState(this.errorMSG);
 }

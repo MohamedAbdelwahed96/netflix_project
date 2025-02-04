@@ -13,7 +13,7 @@ class PopularSuccessState extends PopularStates {
 }
 
 class PopularErrorState extends PopularStates {
-  String ErrorMsg;
+  String errorMSG;
 
-  PopularErrorState(this.ErrorMsg);
+  PopularErrorState(this.errorMSG);
 }

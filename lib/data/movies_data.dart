@@ -15,6 +15,8 @@ class Movie {
   final int voteCount;
   final int runtime;
   final String homepage;
+  final String certification;
+  final String certification_country;
 
   Movie({
     required this.adult,
@@ -32,7 +34,9 @@ class Movie {
     required this.voteAverage,
     required this.voteCount,
     required this.runtime,
-    required this.homepage
+    required this.homepage,
+    required this.certification,
+    required this.certification_country
   });
 
   // Function to create a Movie object from a map (deserialization)
@@ -54,6 +58,8 @@ class Movie {
       voteCount: map['vote_count'] ?? 0,
       runtime: map['runtime'] ?? 0,
       homepage: map['homepage'] ?? '',
+      certification: map['certification'] ?? '',
+      certification_country: map['certification'] ?? '',
     );
   }
 }

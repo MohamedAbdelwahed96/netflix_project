@@ -21,9 +21,9 @@ class _RelatedWidgetState extends State<RelatedWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<RelatedCubit, RelatedStates>(
         builder: (context, state) {
-      if (state is RelatedLoadingState)
+      if (state is RelatedLoadingState) {
         return CircleLoading();
-      else if (state is RelatedSuccessState) {
+      } else if (state is RelatedSuccessState) {
         final x = state.movRes.movies;
         return BlocBuilder<GenreCubit, GenreStates>(
           builder: (context, state) {
@@ -70,13 +70,15 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                                         return child;
                                   }, loadingBuilder:
                                       (context, child, loadingProgress) {
-                                    if (loadingProgress == null)
+                                    if (loadingProgress == null) {
                                       return child;
-                                    else
+                                    } else {
                                       return Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 50),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 50),
                                         child: CircleLoading(),
                                       );
+                                    }
                                   }),
                                 )),
                           ).animate().moveX(duration: 1.seconds, begin: 50, end: 0);
@@ -84,17 +86,19 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                   )
                 ],
               );
-            } else
+            } else {
               return SizedBox();
+            }
           },
         );
-      } else if (state is RelatedErrorState)
+      } else if (state is RelatedErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.ErrorMsg, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
         );
-      else
+      } else {
         return SizedBox();
+      }
     });
   }
 }

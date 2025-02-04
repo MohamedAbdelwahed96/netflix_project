@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netfelix_project/core/basic_widgets.dart';
+import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/logic/genre_bloc/cubit.dart';
 import 'package:netfelix_project/logic/genre_bloc/state.dart';
 import 'package:netfelix_project/presentation/screens/movies_screen.dart';
@@ -14,9 +14,9 @@ class CategoriesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(create: (context) => GenreCubit(Dio())..getGenre(),
       child: BlocBuilder<GenreCubit,GenreStates>(builder: (context, state) {
-        if(state is GenreLoadingState)
+        if(state is GenreLoadingState) {
           return CircleLoading();
-        else if (state is GenreSuccessState){
+        } else if (state is GenreSuccessState){
           final x = state.genre;
           return Scaffold(
             backgroundColor: Colors.black,
@@ -30,14 +30,17 @@ class CategoriesScreen extends StatelessWidget {
                 itemBuilder: (context, index){
                   final genre = x[index];
                   return InkWell(
-                    onTap: () =>
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>MoviesScreen(genID: genre.id))),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MoviesScreen(genID: genre.id)));
+
+                      print("film genre === " + genre.id.toString()); // test
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         gradient: LinearGradient(colors: [
-                          Color.fromRGBO(243, 29, 28, 1).withOpacity(0.54),
-                          Color.fromRGBO(243, 29, 28, 1).withOpacity(0.9)
+                          ColorsManager.mainRed.withOpacity(0.54),
+                          ColorsManager.mainRed.withOpacity(0.9)
                         ])
                       ),
                       child: Padding(
@@ -55,10 +58,11 @@ class CategoriesScreen extends StatelessWidget {
             ),
           );
         }
-        else if(state is GenreErrorState)
+        else if(state is GenreErrorState) {
           return Text(state.errorMSG);
-        else
+        } else {
           return SizedBox();
+        }
       }),
     );
   }

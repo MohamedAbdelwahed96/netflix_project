@@ -20,9 +20,9 @@ class _PopularWidgetState extends State<PopularWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PopularCubit, PopularStates>(builder: (context, state) {
-      if (state is PopularLoadingState)
+      if (state is PopularLoadingState) {
         return CircleLoading();
-      else if (state is PopularSuccessState) {
+      } else if (state is PopularSuccessState) {
         final x = state.PopularRes.movies;
         return BlocBuilder<GenreCubit, GenreStates>(
           builder: (context, state) {
@@ -78,13 +78,14 @@ class _PopularWidgetState extends State<PopularWidget> {
                                         return child;
                                       }, loadingBuilder: (context, child,
                                               loadingProgress) {
-                                        if (loadingProgress == null)
+                                        if (loadingProgress == null) {
                                           return child;
-                                        else
+                                        } else {
                                           return Padding(
                                             padding: const EdgeInsets.all(50),
                                             child: CircleLoading(),
                                           );
+                                        }
                                       }),
                                     ],
                                   ),
@@ -97,17 +98,19 @@ class _PopularWidgetState extends State<PopularWidget> {
                   ],
                 ),
               );
-            } else
+            } else {
               return SizedBox();
+            }
           },
         );
-      } else if (state is PopularErrorState)
+      } else if (state is PopularErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.ErrorMsg, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
         );
-      else
+      } else {
         return SizedBox();
+      }
     });
   }
 }

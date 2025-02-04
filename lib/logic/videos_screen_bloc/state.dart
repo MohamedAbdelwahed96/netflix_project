@@ -13,7 +13,7 @@ class VideosScreenSuccessState extends VideosScreenStates {
 }
 
 class VideosScreenErrorState extends VideosScreenStates {
-  String errormsg;
+  String errorMSG;
 
-  VideosScreenErrorState(this.errormsg);
+  VideosScreenErrorState(this.errorMSG);
 }

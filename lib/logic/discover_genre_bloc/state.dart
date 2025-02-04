@@ -13,6 +13,6 @@ class DiscoverGenreSuccessState extends DiscoverGenreStates{
 }
 
 class DiscoverGenreErrorState extends DiscoverGenreStates{
-  String err;
-  DiscoverGenreErrorState(this.err);
+  String errorMSG;
+  DiscoverGenreErrorState(this.errorMSG);
 }

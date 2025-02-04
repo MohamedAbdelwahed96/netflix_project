@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:netfelix_project/core/basic_widgets.dart';
+import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/core/paths.dart';
 import 'package:netfelix_project/logic/discover_genre_bloc/cubit.dart';
 import 'package:netfelix_project/logic/discover_genre_bloc/state.dart';
@@ -11,7 +12,7 @@ import 'package:netfelix_project/presentation/screens/details_screen.dart';
 
 class MoviesScreen extends StatefulWidget {
   final int genID;
-  const MoviesScreen({required this.genID});
+  const MoviesScreen({super.key, required this.genID});
 
   @override
   State<MoviesScreen> createState() => _MoviesScreenState();
@@ -27,9 +28,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
         BlocProvider(create: (context) => GenreCubit(Dio())..getGenre())
       ],
       child: BlocBuilder<DiscoverGenreCubit,DiscoverGenreStates>(builder: (context,state){
-        if(state is DiscoverGenreLoadingState)
+        if(state is DiscoverGenreLoadingState) {
           return CircleLoading();
-        else if(state is DiscoverGenreSuccessState){
+        } else if(state is DiscoverGenreSuccessState){
           final x = state.genRes.movies;
 
           return BlocBuilder<GenreCubit, GenreStates>(
@@ -61,14 +62,15 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                   return child;
                                 }, loadingBuilder: (context, child,
                                     loadingProgress) {
-                                  if (loadingProgress == null)
-                                    return child;
-                                  else
-                                    return Padding(
-                                      padding: const EdgeInsets.all(50),
-                                      child: CircleLoading(),
-                                    );
-                                }),
+                                  if (loadingProgress == null) {
+                                  return child;
+                                } else {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(50),
+                                    child: CircleLoading(),
+                                  );
+                                }
+                              }),
                               );
                             },
                           ),
@@ -94,11 +96,11 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                         width: 40,
                                         height: 40,
                                         decoration: BoxDecoration(
-                                          color: isActive?Color.fromRGBO(243, 29, 28, 1):null,
-                                        border: Border.all(color: Color.fromRGBO(243, 29, 28, 1))),
+                                          color: isActive?ColorsManager.mainRed:null,
+                                        border: Border.all(color: ColorsManager.mainRed)),
                                         child: Center(child: Text("${index+1}",
                                           style: TextStyle(
-                                            color: isActive?Colors.black:Color.fromRGBO(243, 29, 28, 1)),)),
+                                            color: isActive?Colors.black:ColorsManager.mainRed),)),
                                       ),
                                     ),
                                   ),
@@ -110,15 +112,17 @@ class _MoviesScreenState extends State<MoviesScreen> {
                   ),
                 );
               }
-              else
-                return SizedBox();
+              else {
+              return SizedBox();
             }
+          }
           );
         }
-        else if(state is DiscoverGenreErrorState)
-          return Text(state.err);
-        else
+        else if(state is DiscoverGenreErrorState) {
+          return Text(state.errorMSG);
+        } else {
           return SizedBox();
+        }
       }),
     );
   }

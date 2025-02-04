@@ -13,7 +13,7 @@ class NowPlayingSuccessState extends NowPlayingStates {
 }
 
 class NowPlayingErrorState extends NowPlayingStates {
-  String ErrorMsg;
+  String errorMSG;
 
-  NowPlayingErrorState(this.ErrorMsg);
+  NowPlayingErrorState(this.errorMSG);
 }

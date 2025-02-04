@@ -13,7 +13,7 @@ class TopRatedSuccessState extends TopRatedStates {
 }
 
 class TopRatedErrorState extends TopRatedStates {
-  String ErrorMsg;
+  String errorMSG;
 
-  TopRatedErrorState(this.ErrorMsg);
+  TopRatedErrorState(this.errorMSG);
 }

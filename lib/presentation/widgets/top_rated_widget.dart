@@ -21,9 +21,9 @@ class _TopRatedWidgetState extends State<TopRatedWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<TopRatedCubit, TopRatedStates>(
         builder: (context, state) {
-      if (state is TopRatedLoadingState)
+      if (state is TopRatedLoadingState) {
         return CircleLoading();
-      else if (state is TopRatedSuccessState) {
+      } else if (state is TopRatedSuccessState) {
         final x = state.TopRatedRes.movies;
         return BlocBuilder<GenreCubit, GenreStates>(
           builder: (context, state) {
@@ -71,13 +71,14 @@ class _TopRatedWidgetState extends State<TopRatedWidget> {
                                   return child;
                                 }, loadingBuilder:
                                         (context, child, loadingProgress) {
-                                  if (loadingProgress == null)
+                                  if (loadingProgress == null) {
                                     return child;
-                                  else
+                                  } else {
                                     return Padding(
                                       padding: const EdgeInsets.all(50),
                                       child: CircleLoading(),
                                     );
+                                  }
                                 })),
                           )
                               .animate()
@@ -86,17 +87,19 @@ class _TopRatedWidgetState extends State<TopRatedWidget> {
                   )
                 ],
               );
-            } else
+            } else {
               return SizedBox();
+            }
           },
         );
-      } else if (state is TopRatedErrorState)
+      } else if (state is TopRatedErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.ErrorMsg, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
         );
-      else
+      } else {
         return SizedBox();
+      }
     });
   }
 }

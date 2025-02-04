@@ -31,13 +31,15 @@ class DetailsScreen extends StatelessWidget {
       ],
       child: BlocBuilder<DetailsScreenCubit, DetailsScreenStates>(
           builder: (context, state) {
-        if (state is DetailsScreenInitialState)
+        if (state is DetailsScreenInitialState) {
           return CircleLoading();
-        else if (state is DetailsScreenSuccessState) {
+        } else if (state is DetailsScreenSuccessState) {
           final movie = state.MovieDetails;
 
           // Map the genreIds to genre names => Find the genre name for each genre ID
           final genreNames = genreIds.map((id) => genreList.firstWhere((genre) => genre.id == id).name).toList();
+
+          print("film id === " + movieID.toString()); // test
 
           return Scaffold(
             backgroundColor: Colors.black,
@@ -75,7 +77,7 @@ class DetailsScreen extends StatelessWidget {
                                     size: 16),
                                 SizedBox(width: 3),
                                 Text(
-                                  movie.runtime.toString() + " minutes",
+                                  "${movie.runtime} minutes",
                                   style: TextStyle(
                                       fontFamily: "Lato",
                                       fontWeight: FontWeight.w400,
@@ -88,7 +90,7 @@ class DetailsScreen extends StatelessWidget {
                                     size: 16),
                                 SizedBox(width: 3),
                                 Text(
-                                  movie.voteAverage.toString() + " (IMDb)",
+                                  "${movie.voteAverage} (IMDb)",
                                   style: TextStyle(
                                       fontFamily: "Lato",
                                       fontWeight: FontWeight.w400,
@@ -101,7 +103,7 @@ class DetailsScreen extends StatelessWidget {
                                 .moveY(begin: 50, end: 0, delay: 500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
                             SizedBox(height: 24),
                             Text(
-                              "Genre: " + genreNames.join(", "),
+                              "Genre: ${genreNames.join(", ")}",
                               style: TextStyle(
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w500,
@@ -194,10 +196,11 @@ class DetailsScreen extends StatelessWidget {
               ),
             )
           );
-        } else if (state is DetailsScreenErrorState)
-          return Text(state.ErrorMSG);
-        else
+        } else if (state is DetailsScreenErrorState) {
+          return Text(state.errorMSG);
+        } else {
           return SizedBox();
+        }
       }),
     );
   }
