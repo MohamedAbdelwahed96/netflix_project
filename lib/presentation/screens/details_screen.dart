@@ -12,6 +12,7 @@ import 'package:netfelix_project/logic/related_bloc/cubit.dart';
 import 'package:netfelix_project/presentation/screens/pics_screen.dart';
 import 'package:netfelix_project/presentation/screens/videos_screen.dart';
 import 'package:netfelix_project/presentation/screens/web_page.dart';
+import 'package:netfelix_project/presentation/widgets/default_image_widget.dart';
 import 'package:netfelix_project/presentation/widgets/related_widget.dart';
 import 'package:readmore/readmore.dart';
 
@@ -50,8 +51,8 @@ class DetailsScreen extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: MediaQuery.of(context).size.height*0.33,
-                        child: Image.network(
-                            movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}original${movie.backdropPath}",
+                        child: movie.backdropPath==""?DefaultImageWidget(text: movie.title):Image.network(
+                            "${Paths.Img}original${movie.backdropPath}",
                             fit: BoxFit.cover),
                       ),
                       Padding(

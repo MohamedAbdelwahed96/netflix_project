@@ -18,6 +18,7 @@ class CategoriesScreen extends StatelessWidget {
           return CircleLoading();
         } else if (state is GenreSuccessState){
           final x = state.genre;
+
           return Scaffold(
             backgroundColor: Colors.black,
             body: Padding(
@@ -31,7 +32,7 @@ class CategoriesScreen extends StatelessWidget {
                   final genre = x[index];
                   return InkWell(
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MoviesScreen(genID: genre.id)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>MoviesScreen(genID: genre.id, title: genre.name)));
 
                       print("film genre === " + genre.id.toString()); // test
                     },

@@ -8,6 +8,7 @@ import 'package:netfelix_project/logic/genre_bloc/state.dart';
 import 'package:netfelix_project/logic/related_bloc/cubit.dart';
 import 'package:netfelix_project/logic/related_bloc/state.dart';
 import 'package:netfelix_project/presentation/screens/details_screen.dart';
+import 'package:netfelix_project/presentation/widgets/default_image_widget.dart';
 
 class RelatedWidget extends StatefulWidget {
   const RelatedWidget({super.key});
@@ -63,8 +64,8 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                                 },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(20),
-                                  child: Image.network(
-                                      movie.backdropPath==""?"${Paths.Img}w500${movie.posterPath}":"${Paths.Img}w500${movie.backdropPath}",
+                                  child: movie.backdropPath==""?DefaultImageWidget(text: movie.title, size: 150.0):Image.network(
+                                      "${Paths.Img}w500${movie.backdropPath}",
                                       width: 142,
                                       fit: BoxFit.cover, frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
                                         return child;

@@ -9,10 +9,12 @@ import 'package:netfelix_project/logic/discover_genre_bloc/state.dart';
 import 'package:netfelix_project/logic/genre_bloc/cubit.dart';
 import 'package:netfelix_project/logic/genre_bloc/state.dart';
 import 'package:netfelix_project/presentation/screens/details_screen.dart';
+import 'package:netfelix_project/presentation/widgets/default_image_widget.dart';
 
 class MoviesScreen extends StatefulWidget {
   final int genID;
-  const MoviesScreen({super.key, required this.genID});
+  final String title;
+  const MoviesScreen({super.key, required this.genID, required this.title});
 
   @override
   State<MoviesScreen> createState() => _MoviesScreenState();
@@ -32,6 +34,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
           return CircleLoading();
         } else if(state is DiscoverGenreSuccessState){
           final x = state.genRes.movies;
+          final int totalPages = state.totalPages;
 
           return BlocBuilder<GenreCubit, GenreStates>(
             builder: (context, state){
@@ -39,12 +42,17 @@ class _MoviesScreenState extends State<MoviesScreen> {
                 final genreList = state.genre;
 
                 return Scaffold(
+                  appBar: AppBar(
+                    title: Text("${widget.title.replaceAll(" Movie", "")} Movies", style: TextStyle(color: Colors.white)),
+                    backgroundColor: Colors.black,
+                     iconTheme: IconThemeData(color: Colors.white),
+                  ),
                   backgroundColor: Colors.black,
                   body: SingleChildScrollView(
                     child: Column(
                       children: [
                         SizedBox(
-                          height: MediaQuery.of(context).size.height*0.85,
+                          height: MediaQuery.of(context).size.height*0.75,
                           child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3,
                               mainAxisSpacing: 20),
@@ -54,7 +62,8 @@ class _MoviesScreenState extends State<MoviesScreen> {
                               return InkWell(
                                 onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(
                                     movieID: movie.id, genreIds: movie.genreIds, genreList: genreList))),
-                                child: Image.network(
+                                child: movie.posterPath==""?DefaultImageWidget(text: movie.title):
+                                Image.network(
                                     "${Paths.Img}w500${movie.posterPath}",
                                     fit: BoxFit.fitHeight, frameBuilder:
                                     (context, child, frame,
@@ -75,11 +84,12 @@ class _MoviesScreenState extends State<MoviesScreen> {
                             },
                           ),
                         ),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width*0.8,
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.95,
                           height: MediaQuery.of(context).size.height*0.1,
+                          color: Colors.black,
                           child: ListView.builder(
-                              itemCount: 500,
+                              itemCount: totalPages,
                               scrollDirection: Axis.horizontal,
                               itemBuilder: (context,index){
                                 bool isActive = activeIndex == index;
@@ -90,7 +100,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                       onTap: (){
                                         final page=index+1;
                                         setState(() => activeIndex=index);
-                                        context.read<DiscoverGenreCubit>().getGenre(widget.genID, page);
+                                        isActive?SizedBox():context.read<DiscoverGenreCubit>().getGenre(widget.genID, page);
                                       },
                                       child: Container(
                                         width: 40,

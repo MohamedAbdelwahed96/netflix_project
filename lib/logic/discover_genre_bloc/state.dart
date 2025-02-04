@@ -8,8 +8,9 @@ class DiscoverGenreLoadingState extends DiscoverGenreStates{}
 
 class DiscoverGenreSuccessState extends DiscoverGenreStates{
   MovieResponse genRes;
+  final int totalPages;
 
-  DiscoverGenreSuccessState(this.genRes);
+  DiscoverGenreSuccessState(this.genRes, this.totalPages);
 }
 
 class DiscoverGenreErrorState extends DiscoverGenreStates{

@@ -13,8 +13,15 @@ class DiscoverGenreCubit extends Cubit<DiscoverGenreStates> {
     try {
         final response = await dio.get("${Paths.Discover}&with_genres=$id&page=$pageNumber&certification_country=US&certification.lte=R");
         if (response.statusCode == 200) {
-          final genRes = MovieResponse.fromMap(response.data);
-          emit(DiscoverGenreSuccessState(genRes));
+          final int totalPages;
+          if(response.data["total_pages"]>500) {
+          totalPages = 500;
+        }
+          else {
+          totalPages = response.data["total_pages"];
+        }
+        final genRes = MovieResponse.fromMap(response.data);
+          emit(DiscoverGenreSuccessState(genRes, totalPages));
         }
     }
       catch (e) {
