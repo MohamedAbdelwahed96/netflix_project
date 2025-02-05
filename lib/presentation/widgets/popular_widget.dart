@@ -42,7 +42,7 @@ class _PopularWidgetState extends State<PopularWidget> {
                             fontFamily: "SF Pro Display",
                             fontWeight: FontWeight.w700,
                             fontSize: 20.92,
-                            color: Colors.white),
+                            color: Theme.of(context).colorScheme.primary),
                       ),
                     ),
                     Expanded(
@@ -106,7 +106,7 @@ class _PopularWidgetState extends State<PopularWidget> {
       } else if (state is PopularErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
         );
       } else {
         return SizedBox();

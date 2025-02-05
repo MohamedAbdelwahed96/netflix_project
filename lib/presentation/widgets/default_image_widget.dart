@@ -17,7 +17,7 @@ class DefaultImageWidget extends StatelessWidget {
         child: Center(
             child: Text(text,
           style: TextStyle(
-              color: Colors.white,
+              color: Theme.of(context).colorScheme.primary,
           fontSize: 16,
           fontWeight: FontWeight.w700),
         )),

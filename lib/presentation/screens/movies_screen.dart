@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:marquee/marquee.dart';
 import 'package:netfelix_project/core/basic_widgets.dart';
 import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/core/paths.dart';
@@ -22,11 +23,12 @@ class MoviesScreen extends StatefulWidget {
 
 class _MoviesScreenState extends State<MoviesScreen> {
   int activeIndex=0;
+  int page=1;
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => DiscoverGenreCubit(Dio())..getGenre(widget.genID,1)),
+        BlocProvider(create: (context) => DiscoverGenreCubit(Dio())..getGenre(widget.genID,page)),
         BlocProvider(create: (context) => GenreCubit(Dio())..getGenre())
       ],
       child: BlocBuilder<DiscoverGenreCubit,DiscoverGenreStates>(builder: (context,state){
@@ -43,11 +45,25 @@ class _MoviesScreenState extends State<MoviesScreen> {
 
                 return Scaffold(
                   appBar: AppBar(
-                    title: Text("${widget.title.replaceAll(" Movie", "")} Movies", style: TextStyle(color: Colors.white)),
-                    backgroundColor: Colors.black,
-                     iconTheme: IconThemeData(color: Colors.white),
+                    title: widget.title.length>9?SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: Marquee(
+                          text:"${widget.title.replaceAll(" Movie", "")} Movies, Page ${page}",
+                          style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                          scrollAxis: Axis.horizontal,
+                        blankSpace: 40,
+                        velocity: 30,
+                        pauseAfterRound: Duration(seconds: 1),
+                      )
+                    )
+                    :Text(
+                      "${widget.title.replaceAll(" Movie", "")} Movies, Page ${page}",
+                      style: TextStyle(color: Theme.of(context).colorScheme.primary),
+                    ),
+                    backgroundColor: Theme.of(context).colorScheme.surface,
+                     iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
                   ),
-                  backgroundColor: Colors.black,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   body: SingleChildScrollView(
                     child: Column(
                       children: [
@@ -87,7 +103,7 @@ class _MoviesScreenState extends State<MoviesScreen> {
                         Container(
                           width: MediaQuery.of(context).size.width*0.95,
                           height: MediaQuery.of(context).size.height*0.1,
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.surface,
                           child: ListView.builder(
                               itemCount: totalPages,
                               scrollDirection: Axis.horizontal,
@@ -98,8 +114,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                     padding: const EdgeInsets.symmetric(horizontal: 8),
                                     child: InkWell(
                                       onTap: (){
-                                        final page=index+1;
-                                        setState(() => activeIndex=index);
+                                        setState(() {
+                                          page=index+1;
+                                          activeIndex=index;
+                                        });
                                         isActive?SizedBox():context.read<DiscoverGenreCubit>().getGenre(widget.genID, page);
                                       },
                                       child: Container(
@@ -108,9 +126,10 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                         decoration: BoxDecoration(
                                           color: isActive?ColorsManager.mainRed:null,
                                         border: Border.all(color: ColorsManager.mainRed)),
-                                        child: Center(child: Text("${index+1}",
+                                        child: Center(
+                                            child: Text("${index+1}",
                                           style: TextStyle(
-                                            color: isActive?Colors.black:ColorsManager.mainRed),)),
+                                            color: isActive?Theme.of(context).colorScheme.surface:ColorsManager.mainRed),)),
                                       ),
                                     ),
                                   ),

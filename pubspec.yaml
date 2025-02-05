@@ -44,6 +44,8 @@ dependencies:
   readmore: ^3.0.0
   photo_view: ^0.15.0
   youtube_player_flutter: ^9.1.1
+  provider: ^6.1.2
+  marquee: ^2.3.0
 
 
 dev_dependencies:

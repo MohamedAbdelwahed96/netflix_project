@@ -20,7 +20,7 @@ class CategoriesScreen extends StatelessWidget {
           final x = state.genre;
 
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             body: Padding(
               padding: const EdgeInsets.all(8.0),
               child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -40,8 +40,8 @@ class CategoriesScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         gradient: LinearGradient(colors: [
-                          ColorsManager.mainRed.withOpacity(0.54),
-                          ColorsManager.mainRed.withOpacity(0.9)
+                          ColorsManager.mainRed.withValues(alpha: 0.54),
+                          ColorsManager.mainRed.withValues(alpha: 0.9)
                         ])
                       ),
                       child: Padding(

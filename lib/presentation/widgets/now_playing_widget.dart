@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/core/paths.dart';
 import 'package:netfelix_project/logic/genre_bloc/cubit.dart';
 import 'package:netfelix_project/logic/genre_bloc/state.dart';
@@ -48,25 +49,28 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                                         genreList: genreList,
                                       )));
                         },
-                        child: Image.network(
-                            "${Paths.Img}original${movie.backdropPath}",
-                            opacity: const AlwaysStoppedAnimation(.75),
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.cover, frameBuilder: (context, child,
-                                frame, wasSynchronouslyLoaded) {
-                          return child;
-                        }, loadingBuilder: (context, child, loadingProgress) {
-                          if (loadingProgress == null) {
+                        child: AnimatedOpacity(
+                          duration: Duration(milliseconds: 300),
+                          opacity: Theme.of(context).brightness == Brightness.dark ? 0.75 : 1.0,
+                          child: Image.network(
+                              "${Paths.Img}original${movie.backdropPath}",
+                              width: MediaQuery.of(context).size.width,
+                              fit: BoxFit.cover, frameBuilder: (context, child,
+                                  frame, wasSynchronouslyLoaded) {
                             return child;
-                          } else {
-                            {
-                              return Padding(
-                                padding: const EdgeInsets.all(150),
-                                child: CircleLoading(),
-                              );
+                          }, loadingBuilder: (context, child, loadingProgress) {
+                            if (loadingProgress == null) {
+                              return child;
+                            } else {
+                              {
+                                return Padding(
+                                  padding: const EdgeInsets.all(150),
+                                  child: CircleLoading(),
+                                );
+                              }
                             }
-                          }
-                        }),
+                          }),
+                        ),
                       );
                     }),
               ),
@@ -77,8 +81,8 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
                   children: [
                     PulseIcon(
                       icon: Icons.fiber_manual_record,
-                      pulseColor: Color.fromRGBO(255, 0, 4, 1),
-                      iconColor: Color.fromRGBO(255, 0, 4, 1),
+                      pulseColor: ColorsManager.mainRed,
+                      iconColor: ColorsManager.mainRed,
                       iconSize: 10,
                       innerSize: 15,
                       pulseSize: 40,
@@ -103,7 +107,7 @@ class _NowPlayingWidgetState extends State<NowPlayingWidget> {
       } else if (state is NowPlayingErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
         );
       } else {
         return SizedBox();

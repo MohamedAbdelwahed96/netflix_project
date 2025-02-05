@@ -39,7 +39,7 @@ class _RelatedWidgetState extends State<RelatedWidget> {
                         fontFamily: "Lato",
                         fontWeight: FontWeight.w500,
                         fontSize: 16,
-                        color: Colors.white),
+                        color: Theme.of(context).colorScheme.primary),
                   ),
                   SizedBox(height: 8),
                   SizedBox(
@@ -95,7 +95,7 @@ class _RelatedWidgetState extends State<RelatedWidget> {
       } else if (state is RelatedErrorState) {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 50),
-          child: Text(state.errorMSG, style: TextStyle(color: Colors.white)),
+          child: Text(state.errorMSG, style: TextStyle(color: Theme.of(context).colorScheme.primary)),
         );
       } else {
         return SizedBox();

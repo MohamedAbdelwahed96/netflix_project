@@ -26,7 +26,7 @@ class PicsScreen extends StatelessWidget {
             final x = state.img.backdrops;
 
             return Scaffold(
-              backgroundColor: Colors.black,
+              backgroundColor: Theme.of(context).colorScheme.surface,
               body: Padding(
                 padding: const EdgeInsets.all(24),
                 child: SizedBox(
@@ -44,6 +44,7 @@ class PicsScreen extends StatelessWidget {
                           onTap: () {
                             Navigator.push(context, MaterialPageRoute(
                                     builder: (_) => PhotoViewGallery.builder(
+                                      backgroundDecoration: BoxDecoration(color: Theme.of(context).colorScheme.surface),
                                           itemCount: x.length,
                                           builder: (context, index) {
                                             final movie = x[index];
@@ -51,7 +52,7 @@ class PicsScreen extends StatelessWidget {
                                             return PhotoViewGalleryPageOptions(
                                                 imageProvider: NetworkImage("${Paths.Img}original${movie.filePath}"),
                                                 minScale: PhotoViewComputedScale.contained,
-                                                maxScale: PhotoViewComputedScale.covered);
+                                                maxScale: PhotoViewComputedScale.covered,);
                                           },
                                           pageController: PageController(initialPage: index),
                                           loadingBuilder: (context, event) => CircleLoading()),

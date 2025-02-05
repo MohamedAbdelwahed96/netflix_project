@@ -26,7 +26,7 @@ class VideosScreen extends StatelessWidget {
             return Stack(
               children: [
                 Scaffold(
-                  backgroundColor: Colors.black,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   body: Padding(
                     padding: const EdgeInsets.all(12),
                     child: ListView.builder(
@@ -61,7 +61,7 @@ class VideosScreen extends StatelessWidget {
                                     fontFamily: "SF Pro Display",
                                     fontWeight: FontWeight.w700,
                                     fontSize: 20.92,
-                                    color: Colors.white
+                                    color: Theme.of(context).colorScheme.primary
                                 ),)
                               ],
                             ).animate()
@@ -74,7 +74,7 @@ class VideosScreen extends StatelessWidget {
                 IconButton(
                     onPressed: () {
                       Navigator.pop(context);},
-                    icon: Icon(Icons.arrow_back_ios_new, color: Colors.white, size: 28)
+                    icon: Icon(Icons.arrow_back_ios_new, color: Theme.of(context).colorScheme.primary, size: 28)
                 )
               ],
             );

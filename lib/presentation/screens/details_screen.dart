@@ -43,7 +43,7 @@ class DetailsScreen extends StatelessWidget {
           print("film id === " + movieID.toString()); // test
 
           return Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: Theme.of(context).colorScheme.surface,
             body: SingleChildScrollView(
               child: Stack(
                 children: [
@@ -66,7 +66,7 @@ class DetailsScreen extends StatelessWidget {
                                 fontFamily: "Lato",
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             ).animate().fadeIn(duration: 1.seconds)
                                 .moveY(begin: 50, end: 0, duration: 1.seconds, curve: Curves.easeOut),
@@ -74,7 +74,7 @@ class DetailsScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Icon(Icons.access_time_rounded,
-                                    color: Color.fromRGBO(188, 188, 188, 1),
+                                    color: Theme.of(context).colorScheme.secondary,
                                     size: 16),
                                 SizedBox(width: 3),
                                 Text(
@@ -83,11 +83,11 @@ class DetailsScreen extends StatelessWidget {
                                       fontFamily: "Lato",
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
-                                      color: Color.fromRGBO(188, 188, 188, 1)),
+                                      color: Theme.of(context).colorScheme.secondary),
                                 ),
                                 SizedBox(width: 24),
                                 Icon(Icons.star,
-                                    color: Color.fromRGBO(188, 188, 188, 1),
+                                    color: Theme.of(context).colorScheme.secondary,
                                     size: 16),
                                 SizedBox(width: 3),
                                 Text(
@@ -96,7 +96,7 @@ class DetailsScreen extends StatelessWidget {
                                       fontFamily: "Lato",
                                       fontWeight: FontWeight.w400,
                                       fontSize: 12,
-                                      color: Color.fromRGBO(188, 188, 188, 1)),
+                                      color: Theme.of(context).colorScheme.secondary),
                                 )
                               ],
                             )
@@ -109,7 +109,7 @@ class DetailsScreen extends StatelessWidget {
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             )
                                 .animate().fadeIn(delay: 1.seconds, duration: 1.seconds)
@@ -121,7 +121,7 @@ class DetailsScreen extends StatelessWidget {
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w500,
                                 fontSize: 16,
-                                color: Colors.white,
+                                color: Theme.of(context).colorScheme.primary,
                               ),
                             )
                                 .animate().fadeIn(delay: 1500.milliseconds, duration: 1.seconds)
@@ -139,17 +139,17 @@ class DetailsScreen extends StatelessWidget {
                                 fontFamily: "Lato",
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
-                                color: Color.fromRGBO(188, 188, 188, 1),
+                                color: Theme.of(context).colorScheme.secondary,
                               ),
                               moreStyle: TextStyle(
                                   fontFamily: "Lato",
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
-                                  color: Colors.white),
+                                  color: Theme.of(context).colorScheme.primary),
                               lessStyle: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14,
-                                  color: Colors.white),
+                                  color: Theme.of(context).colorScheme.primary),
                             )
                                 .animate().fadeIn(delay: 1500.milliseconds, duration: 1.seconds)
                                 .moveY(begin: 50, end: 0, delay: 1500.milliseconds, duration: 1.seconds, curve: Curves.easeOut),
@@ -175,6 +175,7 @@ class DetailsScreen extends StatelessWidget {
                         DropdownButton(
                             icon: Icon(Icons.more_vert,color: Colors.white, size: 28),
                             style: TextStyle(color: Colors.black),
+                            dropdownColor: Colors.white,
                             underline: SizedBox(),
                             onChanged: (String? value){
                               value=="Photos"?Navigator.push(context,MaterialPageRoute(builder: (context) => PicsScreen(movieId: movie.id.toString()))):
