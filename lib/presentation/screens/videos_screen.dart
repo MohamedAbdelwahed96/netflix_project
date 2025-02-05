@@ -49,7 +49,7 @@ class VideosScreen extends StatelessWidget {
                                     ),
                                     showVideoProgressIndicator: true,
                                     progressIndicatorColor: ColorsManager.mainRed,
-                                    progressColors: const ProgressBarColors(
+                                    progressColors: ProgressBarColors(
                                       playedColor: ColorsManager.mainRed,
                                       handleColor: ColorsManager.mainRed,
                                     ),
