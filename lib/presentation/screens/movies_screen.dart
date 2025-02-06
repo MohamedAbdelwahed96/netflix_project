@@ -64,45 +64,45 @@ class _MoviesScreenState extends State<MoviesScreen> {
                      iconTheme: IconThemeData(color: Theme.of(context).colorScheme.primary),
                   ),
                   backgroundColor: Theme.of(context).colorScheme.surface,
-                  body: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: MediaQuery.of(context).size.height*0.75,
-                          child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 3,
-                              mainAxisSpacing: 20),
-                            itemCount: x.length,
-                            itemBuilder: (context, index){
-                              final movie = x[index];
-                              return InkWell(
-                                onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(
-                                    movieID: movie.id, genreIds: movie.genreIds, genreList: genreList))),
-                                child: movie.posterPath==""?DefaultImageWidget(text: movie.title):
-                                Image.network(
-                                    "${Paths.Img}w500${movie.posterPath}",
-                                    fit: BoxFit.fitHeight, frameBuilder:
-                                    (context, child, frame,
-                                    wasSynchronouslyLoaded) {
-                                  return child;
-                                }, loadingBuilder: (context, child,
-                                    loadingProgress) {
-                                  if (loadingProgress == null) {
-                                  return child;
-                                } else {
-                                  return Padding(
-                                    padding: const EdgeInsets.all(50),
-                                    child: CircleLoading(),
-                                  );
-                                }
-                              }),
-                              );
-                            },
-                          ),
+                  body: Column(
+                    children: [
+                      Expanded(
+                        child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 3,
+                            mainAxisSpacing: 20),
+                          itemCount: x.length,
+                          itemBuilder: (context, index){
+                            final movie = x[index];
+                            return InkWell(
+                              onTap: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => DetailsScreen(
+                                  movieID: movie.id, genreIds: movie.genreIds, genreList: genreList))),
+                              child: movie.posterPath==""?DefaultImageWidget(text: movie.title):
+                              Image.network(
+                                  "${Paths.Img}w500${movie.posterPath}",
+                                  fit: BoxFit.fitHeight, frameBuilder:
+                                  (context, child, frame,
+                                  wasSynchronouslyLoaded) {
+                                return child;
+                              }, loadingBuilder: (context, child,
+                                  loadingProgress) {
+                                if (loadingProgress == null) {
+                                return child;
+                              } else {
+                                return Padding(
+                                  padding: const EdgeInsets.all(50),
+                                  child: CircleLoading(),
+                                );
+                              }
+                            }),
+                            );
+                          },
                         ),
-                        Container(
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 40),
+                        child: Container(
                           width: MediaQuery.of(context).size.width*0.95,
-                          height: MediaQuery.of(context).size.height*0.1,
+                          height: MediaQuery.of(context).size.height*0.07,
                           color: Theme.of(context).colorScheme.surface,
                           child: ListView.builder(
                               itemCount: totalPages,
@@ -135,9 +135,9 @@ class _MoviesScreenState extends State<MoviesScreen> {
                                   ),
                                 );
                               }),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                 );
               }
