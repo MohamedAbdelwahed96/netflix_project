@@ -1,9 +1,7 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:netfelix_project/core/colors.dart';
 import 'package:netfelix_project/logic/theme/theme_provider.dart';
-import 'package:netfelix_project/presentation/screens/home_screen.dart';
 import 'package:netfelix_project/presentation/screens/navigation_bot_bar.dart';
 import 'package:provider/provider.dart';
 
